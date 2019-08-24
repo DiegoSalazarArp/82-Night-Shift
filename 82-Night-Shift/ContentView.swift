@@ -9,8 +9,54 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var schedule: Bool = false
+    @State private var manualy: Bool = false
+    @State private var colorTemperature: CGFloat = 0.5
     var body: some View {
-        Text("Hello World")
+        NavigationView {
+            Form {
+                Section(header: Text("Header text")
+                    .padding(5)
+                    .lineLimit(nil))
+                {
+                    
+                    Toggle(isOn: $schedule){
+                        Text("Schedule")
+                    }
+                    
+                    HStack {
+                        VStack {
+                            Text("From")
+                            Text("To")
+                        }
+                        Spacer()
+                        
+                        NavigationLink(destination: Text("Schedule Settings")){
+                            VStack{
+                                Text("Sunset").foregroundColor(Color.blue)
+                                Text("Sunrise").foregroundColor(Color.blue)
+                            }
+                            
+                        }.fixedSize()
+                    }
+                    
+                }
+                Section(header: Text("").padding())
+                {
+                    Toggle(isOn: $manualy) {
+                        Text("Manually enable it till tomorrow")
+                    }
+                }
+                Section(header: Text("Color Temperature").padding()) {
+                    HStack {
+                        Text("Less Warm")
+                        Slider(value: $colorTemperature)
+                        Text("More Warm")
+                    }
+                }
+            }
+        }
     }
 }
 
